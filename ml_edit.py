@@ -41,13 +41,16 @@ for i in t_days:
 
 total_days = []
 close = []
-
+# total_days = [[xk]]
 for x,y in stock_values[::-1]:
 	# print(x,y)
 	# total_days.append([x])
-	total_days.append([float(x)])
+	# total_days.append([float(x)])
+	# print(x)
 	close.append(float(y))
 
+# print(len(close))
+total_days = [[x] for x in range(1,len(close)+1)]
 
 lin_svr = SVR(kernel = 'linear',C = 1000.0)
 lin_svr.fit(total_days,close)
@@ -64,7 +67,7 @@ rbf_svr.fit(total_days,close)
 plt.figure(figsize=(16,8))
 plt.scatter(total_days, close,color = 'black',label = 'Data')
 plt.plot(total_days, rbf_svr.predict(total_days), color = 'green', label = 'RBF Model')
-plt.plot(total_days, poly_svr.predict(total_days), color = 'yellow', label = 'Poly Model')
+plt.plot(total_days, poly_svr.predict(total_days), color = 'red', label = 'Poly Model')
 plt.plot(total_days, lin_svr.predict(total_days), color = 'orange', label = 'Linear Model')
 
 plt.xlabel('Days')
