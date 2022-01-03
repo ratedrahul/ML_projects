@@ -11,6 +11,8 @@ files = os.listdir()
 files.sort(reverse= True)
 
 
+
+
 # df = pd.read_csv(files[0], names = ['symbol','date','open','high','low','close','volume'],index_col=0)
 
     # exec((f'df{count}=pd.read_csv({i})'))
@@ -48,7 +50,7 @@ for x,y in stock_values[::-1]:
 	# total_days.append([float(x)])
 	# print(x)
 	close.append(float(y))
-
+# total_days.append()
 
 # plt.figure(figsize = (16,8))
 # plt.title('Close Price')
@@ -66,11 +68,12 @@ def SMA(data,period = 30, column = 'close'):
 	# return da
 	# pass
 
-print(type(close))
+# print(type(close))
 
 close_d = pd.DataFrame(close)
 df['SMA30'] = SMA(close_d)
 print(df.columns)
+
 
 
 def strategy(df):
@@ -97,7 +100,16 @@ def strategy(df):
 
 strat = strategy(df)
 df['Buy'] = strat[0]
-df['[Sell'] = strat[1]
+df['Sell'] = strat[1]
+
+plt.figure(figsize = (16,8))
+plt.title('Stock Close price with buy and sell signals ')
+plt.plot(close)
+plt.plot(df['SMA30'])
+plt.show()
+# plt.show()
+# plt.plot(df['close'])
+plt.show()
 
 
 
